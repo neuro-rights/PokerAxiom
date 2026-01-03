@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.env
+
+# IDE
+.claude/
+.vscode/
+.idea/
+
+# Debug/temp files
+debug_*.png
+temp_*.jpg
+*.log
+nul
+
+# Debug session data (screenshots, captures)
+data/debug_sessions/
+data/debug_card_backs/
+
+# Strategy research notes (keep local)
+strategy-research/
+
+# Samples (large binary files - keep local only)
+samples/
+
+# Old calibration images (root level only, not src/calibration)
+/calibration/
+
+# Archive (legacy code)
+archive/
+
+# Extracted cards (generated)
+extracted_cards/
+
+# Extracted data (generated during workflow)
+data/digit_crops/*.png
+data/templates/cards/
+
+# Hand history database (user data)
+data/history.db
+
+# Opponent stats database (user data)
+data/opponent_stats.db
+data/opponent_stats.db.bak
+data/*.db
+data/*.db.bak
+
+# Windows
+Thumbs.db
+Desktop.ini
