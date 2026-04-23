@@ -1,5 +1,5 @@
 """
-Position calculation for 9-max poker tables.
+Position calculation for 10-max poker tables.
 
 Determines hero's position relative to the dealer button.
 """
@@ -8,13 +8,14 @@ from enum import Enum
 
 
 class Position(Enum):
-    """Poker table positions for 9-max."""
+    """Poker table positions for 10-max."""
 
     UTG = "UTG"  # Under the gun (first to act preflop)
     UTG1 = "UTG+1"  # Second early position
     UTG2 = "UTG+2"  # Third early position
     MP = "MP"  # Middle position
     MP1 = "MP+1"  # Second middle position
+    MP2 = "MP+2"  # Second middle position
     CO = "CO"  # Cutoff (one before button)
     BTN = "BTN"  # Button (dealer position)
     SB = "SB"  # Small blind
@@ -28,18 +29,19 @@ POSITION_ORDER = {
     Position.UTG2: 2,
     Position.MP: 3,
     Position.MP1: 4,
-    Position.CO: 5,
-    Position.BTN: 6,
-    Position.SB: 7,  # SB acts first postflop but defends preflop
-    Position.BB: 8,  # BB acts last preflop
+    Position.MP2: 5,
+    Position.CO: 6,
+    Position.BTN: 7,
+    Position.SB: 8,  # SB acts first postflop but defends preflop
+    Position.BB: 9,  # BB acts last preflop
 }
 
 
-def get_hero_position(dealer_seat: int, hero_seat: int = 1, num_players: int = 9) -> Position:
+def get_hero_position(dealer_seat: int, hero_seat: int = 1, num_players: int = 10) -> Position:
     """
     Calculate hero's position based on dealer button location.
 
-    In 9-max:
+    In 10-max:
     - Dealer (BTN) = dealer_seat
     - SB = dealer_seat + 1
     - BB = dealer_seat + 2
@@ -48,9 +50,9 @@ def get_hero_position(dealer_seat: int, hero_seat: int = 1, num_players: int = 9
     - CO = dealer_seat - 1
 
     Args:
-        dealer_seat: Seat number with dealer button (1-9)
+        dealer_seat: Seat number with dealer button (1-10)
         hero_seat: Hero's seat number (default 1, bottom center)
-        num_players: Number of seats at table (default 9)
+        num_players: Number of seats at table (default 10)
 
     Returns:
         Position enum value
@@ -72,7 +74,8 @@ def get_hero_position(dealer_seat: int, hero_seat: int = 1, num_players: int = 9
         5: Position.UTG2,
         6: Position.MP,
         7: Position.MP1,
-        8: Position.CO,
+        8: Position.MP2,
+        9: Position.CO,
     }
 
     return position_map.get(offset, Position.UTG)

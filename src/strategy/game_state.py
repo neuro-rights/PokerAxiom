@@ -130,7 +130,7 @@ class GameState:
                     occupied.add(seat)
         else:
             # Fallback: use stacks and bets
-            for s in range(1, 10):
+            for s in range(1, 11):
                 if self.stacks.get(s) and self.stacks[s] > 0:
                     occupied.add(s)
                 elif self.bets.get(s) and self.bets[s] > 0:
@@ -139,10 +139,10 @@ class GameState:
         if len(occupied) < 2:
             return 0, 0
 
-        # Find next occupied seat after dealer (wrapping around 1-9)
+        # Find next occupied seat after dealer (wrapping around 1-10)
         def next_occupied(start: int) -> int:
-            for i in range(1, 10):
-                seat = ((start - 1 + i) % 9) + 1  # Wrap 1-9
+            for i in range(1, 11):
+                seat = ((start - 1 + i) % 10) + 1  # Wrap 1-10
                 if seat in occupied:
                     return seat
             return 0
@@ -232,7 +232,7 @@ class GameState:
             pot: Detected pot size
             stacks: Stack sizes by seat {1: 3.97, 2: 1.50, ...}
             bets: Current bets by seat {1: 0.02, 2: None, ...}
-            dealer_seat: Seat with dealer button (1-9)
+            dealer_seat: Seat with dealer button (1-10)
             active_seats: Seats with visible card backs (still in hand) {2: True, 3: False, ...}
 
         Returns:
@@ -256,7 +256,7 @@ class GameState:
             True if we have hero cards and dealer position
         """
         valid_hero = len(self.hero_cards) == 2 and all(c and c != "--" for c in self.hero_cards)
-        valid_dealer = 1 <= self.dealer_seat <= 9
+        valid_dealer = 1 <= self.dealer_seat <= 10
         return valid_hero and valid_dealer
 
     def is_preflop(self) -> bool:

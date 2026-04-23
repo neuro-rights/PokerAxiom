@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 """
-Main entry point for the 2NL 9-Max Strategy Overlay.
+Main entry point for the 2NL 10-Max Strategy Overlay.
 
 Runs the live poker overlay with real-time decision recommendations
-based on the proven 2NL 9-max TAG exploitative strategy.
+based on the proven 2NL 10-max TAG exploitative strategy.
 
 Usage:
     python main.py
@@ -25,7 +25,7 @@ from src.capture.strategy_overlay import main  # noqa: E402
 def run():
     """Run the live strategy overlay."""
     print("=" * 60)
-    print("  2NL 9-Max Strategy Overlay - Live Decision Support")
+    print("  2NL 10-Max Strategy Overlay - Live Decision Support")
     print("=" * 60)
     print()
     print("Strategy: Tight-Aggressive (TAG) Exploitative")

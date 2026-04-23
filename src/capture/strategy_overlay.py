@@ -2,7 +2,7 @@
 Strategy Overlay - Live decision support overlay for poker tables.
 
 Extends the debug overlay with strategy recommendations based on
-the 2NL 9-max TAG strategy engine.
+the 2NL 10-max TAG strategy engine.
 
 Usage:
     python scripts/run_strategy.py

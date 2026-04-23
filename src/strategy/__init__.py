@@ -1,5 +1,5 @@
 """
-Strategy module for 2NL 9-max hybrid GTO + exploitative poker strategy.
+Strategy module for 2NL 10-max hybrid GTO + exploitative poker strategy.
 
 Provides position calculation, hand evaluation, and action recommendations
 using a balanced approach: GTO baseline with 2NL population exploits.

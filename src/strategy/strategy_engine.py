@@ -1,5 +1,5 @@
 """
-Strategy Engine for 2NL 9-max TAG poker.
+Strategy Engine for 2NL 10-max TAG poker.
 
 Implements the proven exploitative strategy from the research document.
 Provides action recommendations based on position, hand strength, and game context.

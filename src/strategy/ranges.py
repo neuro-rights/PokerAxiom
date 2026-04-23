@@ -1,5 +1,5 @@
 """
-Opening range definitions for 2NL 9-max TAG strategy.
+Opening range definitions for 2NL 10-max TAG strategy.
 
 Based on position-based VPIP targets from the 2NL strategy guide:
 - UTG: ~10% (77+, ATs+, KQs, AJo+)
@@ -7,6 +7,7 @@ Based on position-based VPIP targets from the 2NL strategy guide:
 - UTG+2: ~14% (55+, A9s+, KTs+, QTs+, JTs, ATo+, KQo)
 - MP (LJ): ~16% (44+, A8s+, K9s+, Q9s+, J9s+, T9s, ATo+, KJo+)
 - MP+1 (HJ): ~18% (33+, A5s+, K8s+, Q9s+, J9s+, T8s+, 98s, A9o+, KTo+, QJo)
+- MP+2 (HJ): ~18% (33+, A5s+, K8s+, Q9s+, J9s+, T8s+, 98s, A9o+, KTo+, QJo)
 - CO: ~25% (22+, A2s+, K5s+, Q8s+, J8s+, T7s+, 97s+, 87s, 76s, A7o+, K9o+, QTo+, JTo)
 - BTN: ~40-50% (All pairs, all suited aces, most suited kings, suited connectors 54s+)
 - SB: ~30% (Tighter than BTN due to OOP)
@@ -85,8 +86,22 @@ MP1_OPEN_RANGE: set[str] = MP_OPEN_RANGE | {
     "QJo",
 }
 
+# MP+2 (HJ): ~18% - Add 33, A5s-A7s, K8s, T8s, 98s, A9o, KTo, QJo
+MP2_OPEN_RANGE: set[str] = MP1_OPEN_RANGE | {
+    "33",
+    "A7s",
+    "A6s",
+    "A5s",
+    "K8s",
+    "T8s",
+    "98s",
+    "A9o",
+    "KTo",
+    "QJo",
+}
+
 # CO: ~25% - 22+, A2s+, K5s+, Q8s+, J8s+, T7s+, 97s+, 87s, 76s, A7o+, K9o+, QTo+, JTo
-CO_OPEN_RANGE: set[str] = MP1_OPEN_RANGE | {
+CO_OPEN_RANGE: set[str] = MP2_OPEN_RANGE | {
     "22",  # All remaining pairs
     "A4s",
     "A3s",
@@ -254,6 +269,7 @@ def get_opening_range(position: Position) -> set[str]:
         Position.UTG2: UTG2_OPEN_RANGE,
         Position.MP: MP_OPEN_RANGE,
         Position.MP1: MP1_OPEN_RANGE,
+        Position.MP2: MP2_OPEN_RANGE,
         Position.CO: CO_OPEN_RANGE,
         Position.BTN: BTN_OPEN_RANGE,
         Position.SB: SB_STEAL_RANGE,
