@@ -91,7 +91,7 @@ def position_order(position: Position) -> int:
         position: Position enum value
 
     Returns:
-        Integer order (0-8)
+        Integer order (0-9)
     """
     return POSITION_ORDER.get(position, 0)
 
@@ -121,7 +121,7 @@ def is_middle_position(position: Position) -> bool:
     Returns:
         True if MP or MP+1
     """
-    return position in (Position.MP, Position.MP1)
+    return position in (Position.MP, Position.MP1, Position.MP2)
 
 
 def is_early_position(position: Position) -> bool:
