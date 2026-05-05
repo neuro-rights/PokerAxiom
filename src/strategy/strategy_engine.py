@@ -583,7 +583,7 @@ class StrategyEngine:
         # Check if hand is in 3-bet range (QQ+, AK only)
         if in_3bet_range:
             # 3-bet for value - use pot button for 3-bets
-            threbet_amount, button = calculate_3bet(call_amount, is_late)
+            threbet_amount, button = calculate_3bet(gs.bb, call_amount, is_late)
             self._trace.add("3bet", reason=f"{hand} in 3-bet value range (QQ+, AK)")
             return raise_action(
                 threbet_amount,

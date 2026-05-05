@@ -109,7 +109,10 @@ BB = 1.0  # 2NL big blind
 
 
 def calculate_open_raise(
-    limper_count: int = 0, vs_fish: bool = False, has_value_hand: bool = False
+        bb_gamestate: float = 1.0,
+        limper_count: int = 0,
+        vs_fish: bool = False,
+        has_value_hand: bool = False
 ) -> tuple[float, str]:
     """
     Calculate standard open raise sizing mapped to button 1-4.
@@ -129,6 +132,7 @@ def calculate_open_raise(
         Tuple of (raise_amount, button_label)
     """
     rec = get_preflop_raise_recommendation(
+        bb=bb_gamestate,
         limper_count=limper_count,
         vs_fish=vs_fish,
         has_premium=has_value_hand,
@@ -136,7 +140,7 @@ def calculate_open_raise(
     return rec.amount, rec.button
 
 
-def calculate_3bet(open_amount: float, in_position: bool = True) -> tuple[float, str]:
+def calculate_3bet(bb_gamestate: float, open_amount: float, in_position: bool = True) -> tuple[float, str]:
     """
     Calculate 3-bet sizing mapped to button 1-4.
 
@@ -151,8 +155,9 @@ def calculate_3bet(open_amount: float, in_position: bool = True) -> tuple[float,
     Returns:
         Tuple of (3bet_amount, button_label)
     """
-    open_bb = open_amount / BB
+    open_bb = open_amount / bb_gamestate
     rec = get_preflop_raise_recommendation(
+        bb=bb_gamestate,
         is_3bet=True,
         open_amount_bb=open_bb,
         in_position=in_position,

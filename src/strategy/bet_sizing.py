@@ -114,6 +114,7 @@ def snap_to_postflop_size(target_pct: float) -> tuple[BetSizing, str]:
 
 
 def get_preflop_raise_recommendation(
+    bb: float = 1.0,
     limper_count: int = 0,
     vs_fish: bool = False,
     has_premium: bool = False,
@@ -159,7 +160,7 @@ def get_preflop_raise_recommendation(
         sizing, reason = snap_to_preflop_size(target_bb)
         bb_value = PREFLOP_BB_VALUES.get(sizing, 4)
         return BetRecommendation(
-            amount=bb_value * BB,
+            amount=bb_value * bb,
             button=sizing.value,
             sizing_type=sizing,
             reasoning=f"3-bet {reason}",
@@ -178,7 +179,7 @@ def get_preflop_raise_recommendation(
     if limper_count == 1:
         # 3bb + 1 limper = 4bb (button 3)
         return BetRecommendation(
-            amount=4 * BB,
+            amount=4 * bb,
             button="3",
             sizing_type=BetSizing.LARGE,
             reasoning="4bb iso vs limper",
@@ -187,7 +188,7 @@ def get_preflop_raise_recommendation(
     if vs_fish and has_premium:
         # Size up vs fish with premium (button 3)
         return BetRecommendation(
-            amount=4 * BB,
+            amount=4 * bb,
             button="3",
             sizing_type=BetSizing.LARGE,
             reasoning="4bb value vs fish",
@@ -195,7 +196,7 @@ def get_preflop_raise_recommendation(
 
     # Standard open: 3bb (button 2)
     return BetRecommendation(
-        amount=3 * BB,
+        amount=3 * bb,
         button="2",
         sizing_type=BetSizing.STANDARD,
         reasoning="3bb standard open",
