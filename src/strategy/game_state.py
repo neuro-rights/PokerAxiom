@@ -46,8 +46,8 @@ class ActionContext(Enum):
 
 
 # Big blind amount for 2NL
-BB_AMOUNT = 0.02
-SB_AMOUNT = 0.01
+BB_AMOUNT = 1.0
+SB_AMOUNT = 0.5
 
 
 @dataclass

@@ -105,7 +105,7 @@ class Action:
 
 
 # Sizing constants (in big blinds)
-BB = 0.02  # 2NL big blind
+BB = 1.0  # 2NL big blind
 
 
 def calculate_open_raise(
