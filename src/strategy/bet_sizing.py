@@ -14,7 +14,7 @@ from dataclasses import dataclass
 from enum import Enum
 
 # Big blind size for 2NL
-BB = 1.0
+#BB = 1.0
 
 
 class BetSizing(Enum):

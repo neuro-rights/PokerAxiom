@@ -46,8 +46,8 @@ class ActionContext(Enum):
 
 
 # Big blind amount for 2NL
-BB_AMOUNT = 1.0
-SB_AMOUNT = 0.5
+#BB_AMOUNT = 1.0
+#SB_AMOUNT = 0.5
 
 
 @dataclass
@@ -69,8 +69,8 @@ class GameState:
 
     # Fixed values
     hero_seat: int = 1  # Hero always at seat 1 (bottom center)
-    bb: float = BB_AMOUNT
-    sb: float = SB_AMOUNT
+    bb: float = 1.0
+    sb: float = 0.5
 
     # Derived values (computed on creation)
     street: Street = Street.PREFLOP
