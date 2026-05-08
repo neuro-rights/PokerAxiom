@@ -22,6 +22,7 @@ from .actions import (
     check_action,
     fold_action,
     raise_action,
+    allin_action
 )
 from .board_analysis import (
     analyze_flop,
@@ -672,16 +673,14 @@ class StrategyEngine:
         self._trace.add(
             "_facing_3bet_decision",
             call_amount=call_amount,
-            is_4bet_hand=(hand in ("AA", "KK")),
+            is_allin_hand=(hand in ("AA", "KK")),
             is_in_3bet_call_range=in_call_range,
         )
 
-        # 4-bet with AA, KK only
+        # Allin with AA, KK only
         if hand in ("AA", "KK"):
-            # 4-bet sizing roughly 2.2x the 3-bet
-            fourbet_amount = round(call_amount * 2.2, 2)
-            self._trace.add("4bet", reason=f"{hand} is 4-bet for value hand")
-            return raise_action(fourbet_amount, reasoning=f"4-bet {hand} for value")
+            self._trace.add("allin", reason=f"{hand} is allin for value hand")
+            return allin_action(gs.hero_stack(), reasoning=f"allin {hand}")
 
         # QQ can 4-bet or flat (default to calling, can 4-bet vs aggro)
         if hand == "QQ":
