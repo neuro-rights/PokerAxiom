@@ -45,7 +45,7 @@ from .hand_evaluator import (
     evaluate_made_hand,
 )
 from .mdf import MDFAnalysis, calculate_mdf, should_defend
-from .positions import Position, get_hero_position, is_blind, is_late_position
+from .positions import Position, get_position, is_blind, is_late_position
 
 # New hybrid strategy modules
 from .spr_strategy import SPRCategory, SPRStrategy, get_spr_strategy
@@ -60,7 +60,7 @@ STRATEGY_DATE = "2026-01-03T13:07:55Z"
 __all__ = [
     # Core
     "Position",
-    "get_hero_position",
+    "get_position",
     "is_late_position",
     "is_blind",
     "PreflopCategory",

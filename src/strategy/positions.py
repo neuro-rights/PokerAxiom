@@ -36,8 +36,7 @@ POSITION_ORDER = {
     Position.BB: 9,  # BB acts last preflop
 }
 
-
-def get_hero_position(dealer_seat: int, hero_seat: int = 1, num_players: int = 10) -> Position:
+def get_position(dealer_seat: int, target_seat: int = 1, active_players: dict[int,bool]={}) -> Position:
     """
     Calculate hero's position based on dealer button location.
 
@@ -57,12 +56,17 @@ def get_hero_position(dealer_seat: int, hero_seat: int = 1, num_players: int = 1
     Returns:
         Position enum value
     """
-    if not 1 <= dealer_seat <= num_players:
-        return Position.UTG  # Default fallback
 
     # Calculate hero's offset from dealer (clockwise)
     # Offset 0 = BTN, 1 = SB, 2 = BB, 3 = UTG, etc.
-    offset = (hero_seat - dealer_seat) % num_players
+    offset = 0
+    for pos in range(len(active_players)):
+        seat = (dealer_seat + pos) % len(active_players)
+        if seat == target_seat:
+            break
+        if active_players.get(seat) is False:
+            continue
+        offset += 1
 
     # Map offset to position
     position_map = {
@@ -78,7 +82,7 @@ def get_hero_position(dealer_seat: int, hero_seat: int = 1, num_players: int = 1
         9: Position.CO,
     }
 
-    return position_map.get(offset, Position.UTG)
+    return position_map.get(offset, Position.BTN)
 
 
 def position_order(position: Position) -> int:

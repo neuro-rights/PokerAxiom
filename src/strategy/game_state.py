@@ -22,7 +22,7 @@ from .hand_evaluator import (
     evaluate_made_hand,
     get_hand_notation,
 )
-from .positions import Position, get_hero_position
+from .positions import Position, get_position
 from .spr_strategy import SPRCategory, get_spr_category
 
 
@@ -74,7 +74,7 @@ class GameState:
 
     # Derived values (computed on creation)
     street: Street = Street.PREFLOP
-    position: Position = Position.UTG
+    position: Position = Position.BTN
     action_context: ActionContext = ActionContext.UNOPENED
 
     # Hand analysis cache
@@ -105,7 +105,7 @@ class GameState:
 
         # Compute position
         if self.dealer_seat > 0:
-            self.position = get_hero_position(self.dealer_seat, self.hero_seat)
+            self.position = get_position(self.dealer_seat, self.hero_seat, self.active_seats)
 
         # Compute action context
         self.action_context = self._detect_action_context()
@@ -526,4 +526,4 @@ class GameState:
             return None
 
         # Calculate raiser's position
-        return get_hero_position(self.dealer_seat, raiser_seat)
+        return get_position(self.dealer_seat, raiser_seat, self.active_seats)
