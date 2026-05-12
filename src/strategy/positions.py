@@ -61,7 +61,7 @@ def get_position(dealer_seat: int, target_seat: int = 1, active_players: dict[in
     # Offset 0 = BTN, 1 = SB, 2 = BB, 3 = UTG, etc.
     offset = 0
     for pos in range(len(active_players)):
-        seat = (dealer_seat + pos) % len(active_players)
+        seat = (dealer_seat + pos - 1) % len(active_players) + 1
         if seat == target_seat:
             break
         if active_players.get(seat) is False:
